@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# VS Code
+.vscode/
+
+# JetBrains IDEs
+.idea/
+
+# Node (not used now, but future-proofing)
+node_modules/
+
+# Environment files — never commit secrets
+.env
+.env.local
+
+# Logs
+*.log
+npm-debug.log*

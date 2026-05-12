@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO -->
+  <title>Compound Interest Calculator — Utility1</title>
+  <meta name="description" content="See how your savings grow with compound interest. Enter your deposit, monthly contribution, rate, and years — get an instant year-by-year chart. Free, no sign-up." />
+
+  <!-- Open Graph (for link previews on social media / messaging apps) -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://example.com/" />
+  <meta property="og:title"       content="Compound Interest Calculator — Utility1" />
+  <meta property="og:description" content="See how your savings grow year by year. Free, instant, no sign-up." />
+
+  <!-- Favicon placeholder — replace with a real .ico when you have one -->
+  <link rel="icon" href="data:," />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="site-header__logo">Utility1</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" aria-pressed="false">
+        <span class="theme-toggle__icon" aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ── Hero / intro ─────────────────────────────────────────── -->
+    <section class="hero">
+      <div class="container">
+        <h1 class="hero__title">Compound Interest Calculator</h1>
+        <p class="hero__subtitle">Type in your numbers and watch your savings grow — updated instantly.</p>
+      </div>
+    </section>
+
+    <!-- ── Calculator card ───────────────────────────────────────── -->
+    <section class="section" aria-label="Calculator">
+      <div class="container">
+        <div class="calculator-grid">
+
+          <!-- Inputs -->
+          <div class="card inputs-card">
+            <h2 class="card__title">Your Numbers</h2>
+
+            <div class="field">
+              <label class="field__label" for="initialDeposit">
+                Initial Deposit
+                <span class="field__hint">How much you're starting with today</span>
+              </label>
+              <div class="field__input-wrap">
+                <span class="field__prefix" aria-hidden="true">$</span>
+                <input
+                  class="field__input"
+                  type="number"
+                  id="initialDeposit"
+                  name="initialDeposit"
+                  min="0"
+                  step="100"
+                  value="5000"
+                  inputmode="decimal"
+                  aria-describedby="initialDeposit-error"
+                />
+              </div>
+              <span class="field__error" id="initialDeposit-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="monthlyContribution">
+                Monthly Contribution
+                <span class="field__hint">Amount you add each month</span>
+              </label>
+              <div class="field__input-wrap">
+                <span class="field__prefix" aria-hidden="true">$</span>
+                <input
+                  class="field__input"
+                  type="number"
+                  id="monthlyContribution"
+                  name="monthlyContribution"
+                  min="0"
+                  step="50"
+                  value="200"
+                  inputmode="decimal"
+                  aria-describedby="monthlyContribution-error"
+                />
+              </div>
+              <span class="field__error" id="monthlyContribution-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="annualRate">
+                Annual Interest Rate
+                <span class="field__hint">Expected yearly return (e.g. 7 for 7%)</span>
+              </label>
+              <div class="field__input-wrap">
+                <input
+                  class="field__input field__input--no-prefix"
+                  type="number"
+                  id="annualRate"
+                  name="annualRate"
+                  min="0"
+                  max="100"
+                  step="0.1"
+                  value="7"
+                  inputmode="decimal"
+                  aria-describedby="annualRate-error"
+                />
+                <span class="field__suffix" aria-hidden="true">%</span>
+              </div>
+              <span class="field__error" id="annualRate-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="years">
+                Number of Years
+                <span class="field__hint">How long you'll keep saving</span>
+              </label>
+              <div class="field__input-wrap">
+                <input
+                  class="field__input field__input--no-prefix"
+                  type="number"
+                  id="years"
+                  name="years"
+                  min="1"
+                  max="100"
+                  step="1"
+                  value="20"
+                  inputmode="numeric"
+                  aria-describedby="years-error"
+                />
+                <span class="field__suffix" aria-hidden="true">yrs</span>
+              </div>
+              <span class="field__error" id="years-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="compoundFrequency">
+                Compounding Frequency
+                <span class="field__hint">How often interest is added to your balance</span>
+              </label>
+              <select class="field__select" id="compoundFrequency" name="compoundFrequency">
+                <option value="12" selected>Monthly</option>
+                <option value="4">Quarterly</option>
+                <option value="1">Annually</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Results -->
+          <div class="card results-card">
+            <h2 class="card__title">Your Results</h2>
+
+            <div class="result-block">
+              <span class="result-block__label">Final Balance</span>
+              <span class="result-block__value result-block__value--primary" id="finalBalance">—</span>
+            </div>
+
+            <div class="result-block">
+              <span class="result-block__label">Total Contributions</span>
+              <span class="result-block__value" id="totalContributions">—</span>
+            </div>
+
+            <div class="result-block result-block--highlight">
+              <span class="result-block__label">Total Interest Earned</span>
+              <span class="result-block__value result-block__value--accent" id="totalInterest">—</span>
+            </div>
+
+            <p class="results-card__note" id="summaryNote"></p>
+          </div>
+
+        </div><!-- /.calculator-grid -->
+
+        <!-- Chart -->
+        <div class="card chart-card">
+          <h2 class="card__title">Growth Over Time</h2>
+          <p class="chart-card__legend">
+            <span class="legend-dot legend-dot--balance" aria-hidden="true"></span> Total Balance
+            <span class="legend-dot legend-dot--contributions" aria-hidden="true"></span> Your Contributions
+            <span class="legend-spacer" aria-hidden="true">·</span>
+            The gap between the lines is the interest you earned.
+          </p>
+          <div class="chart-wrap" role="img" aria-label="Line chart showing balance and contributions growing over time">
+            <canvas id="growthChart"></canvas>
+          </div>
+        </div>
+
+      </div><!-- /.container -->
+    </section>
+
+    <!-- ── Explainer ──────────────────────────────────────────────── -->
+    <section class="section section--alt" aria-label="Educational content">
+      <div class="container container--narrow">
+
+        <h2>How Compound Interest Works</h2>
+
+        <p>
+          Compound interest is often called "interest on interest." When you earn interest,
+          that interest gets added to your balance — and next time, you earn interest on the
+          larger balance. Over time, this snowball effect can turn modest, consistent savings
+          into a surprisingly large sum.
+        </p>
+
+        <h3>Simple vs. Compound Interest</h3>
+
+        <p>
+          With <strong>simple interest</strong>, you only ever earn interest on your original
+          deposit. Put in $10,000 at 7% and you earn $700 every year — the same $700,
+          forever.
+        </p>
+        <p>
+          With <strong>compound interest</strong>, that $700 gets added to your balance,
+          so in year two you earn 7% on $10,700 — that's $749. In year three it's 7% on
+          $11,449, and so on. The longer the time horizon, the more dramatic the difference.
+        </p>
+
+        <h3>A Worked Example</h3>
+
+        <p>
+          Suppose you invest <strong>$5,000 today</strong>, add <strong>$200 a month</strong>,
+          and earn a <strong>7% annual return</strong>, compounded monthly.
+        </p>
+        <ul>
+          <li>After <strong>10 years</strong>: your balance is roughly <strong>$44,000</strong>. You contributed about $29,000 — the remaining $15,000 is pure interest.</li>
+          <li>After <strong>20 years</strong>: your balance is roughly <strong>$115,000</strong>. You contributed about $53,000 — interest accounts for more than half.</li>
+          <li>After <strong>30 years</strong>: your balance is roughly <strong>$243,000</strong>. You contributed about $77,000 — interest is now nearly two-thirds of the total.</li>
+        </ul>
+        <p>
+          Notice how the interest portion keeps growing even though your monthly contribution
+          never changed. That's compounding doing its work.
+        </p>
+
+        <h3>Why Compounding Frequency Matters</h3>
+
+        <p>
+          "Compounded monthly" means your bank calculates interest twelve times a year and
+          adds it to your balance each time, so you start earning interest on your interest
+          sooner. "Compounded annually" does this only once a year. The difference is small
+          in the short run, but over decades, monthly compounding can add thousands of dollars
+          compared to annual compounding at the same stated rate.
+        </p>
+
+        <h3>The Key Takeaway</h3>
+
+        <p>
+          Time is the most powerful ingredient. Starting five years earlier — even with a
+          smaller deposit — often beats starting later with more money. This is why financial
+          advisors consistently say: the best time to start saving was yesterday; the second
+          best time is today.
+        </p>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <nav class="site-footer__nav" aria-label="Footer navigation">
+        <a href="#" class="site-footer__link">About</a>
+        <a href="#" class="site-footer__link">Privacy Policy</a>
+        <a href="#" class="site-footer__link">Contact</a>
+      </nav>
+      <p class="site-footer__copy">&copy; 2026 Utility1. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Chart.js from CDN — the only external dependency -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>
