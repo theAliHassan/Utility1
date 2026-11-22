@@ -10,7 +10,7 @@
 
   <!-- Open Graph (for link previews on social media / messaging apps) -->
   <meta property="og:type"        content="website" />
-  <meta property="og:url"         content="https://example.com/" />
+  <meta property="og:url"         content="https://thealihassan.github.io/Utility1/" />
   <meta property="og:title"       content="Compound Interest Calculator — Utility1" />
   <meta property="og:description" content="See how your savings grow year by year. Free, instant, no sign-up." />
 
@@ -24,7 +24,7 @@
 
   <header class="site-header">
     <div class="site-header__inner">
-      <a href="/" class="site-header__logo">Utility1</a>
+      <a href="./" class="site-header__logo">Utility1</a>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" aria-pressed="false">
         <span class="theme-toggle__icon" aria-hidden="true"></span>
       </button>
@@ -227,9 +227,9 @@
           and earn a <strong>7% annual return</strong>, compounded monthly.
         </p>
         <ul>
-          <li>After <strong>10 years</strong>: your balance is roughly <strong>$44,000</strong>. You contributed about $29,000 — the remaining $15,000 is pure interest.</li>
-          <li>After <strong>20 years</strong>: your balance is roughly <strong>$115,000</strong>. You contributed about $53,000 — interest accounts for more than half.</li>
-          <li>After <strong>30 years</strong>: your balance is roughly <strong>$243,000</strong>. You contributed about $77,000 — interest is now nearly two-thirds of the total.</li>
+          <li>After <strong>10 years</strong>: your balance is roughly <strong>$45,000</strong>. You contributed about $29,000 — the remaining $16,000 is pure interest.</li>
+          <li>After <strong>20 years</strong>: your balance is roughly <strong>$124,000</strong>. You contributed about $53,000 — interest accounts for more than half.</li>
+          <li>After <strong>30 years</strong>: your balance is roughly <strong>$285,000</strong>. You contributed about $77,000 — interest is now nearly three-quarters of the total.</li>
         </ul>
         <p>
           Notice how the interest portion keeps growing even though your monthly contribution
@@ -263,16 +263,15 @@
   <footer class="site-footer">
     <div class="container">
       <nav class="site-footer__nav" aria-label="Footer navigation">
-        <a href="#" class="site-footer__link">About</a>
-        <a href="#" class="site-footer__link">Privacy Policy</a>
-        <a href="#" class="site-footer__link">Contact</a>
+        <a href="https://github.com/theAliHassan/Utility1" class="site-footer__link">Source on GitHub</a>
       </nav>
-      <p class="site-footer__copy">&copy; 2026 Utility1. All rights reserved.</p>
+      <p class="site-footer__copy">&copy; 2026 Utility1 &middot; MIT licensed &middot; No analytics.</p>
     </div>
   </footer>
 
-  <!-- Chart.js from CDN — the only external dependency -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Chart.js from CDN (pinned to a version) — the only external dependency -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="calc.js"></script>
   <script src="script.js"></script>
 
 </body>

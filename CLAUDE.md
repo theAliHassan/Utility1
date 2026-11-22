@@ -40,7 +40,11 @@ beyond a browser and Chart.js loaded from a CDN.
 /
 ├── index.html       # Compound interest calculator (first page)
 ├── style.css        # All styles
-├── script.js        # All JS
+├── script.js        # DOM, validation, chart rendering
+├── calc.js          # Pure calculation code (no DOM), loaded before script.js and require()d by tests
+├── test/            # Node built-in tests: run `node --test` (no npm install needed)
+├── .github/workflows/ci.yml
+├── docs/screenshot.png
 ├── CLAUDE.md        # This file
 ├── README.md
 ├── LICENSE

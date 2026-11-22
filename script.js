@@ -108,43 +108,7 @@ function validate() {
 
 // ── Core calculation ──────────────────────────────────────────
 
-/*
-  Compound interest with regular contributions:
-    A = P(1 + r/n)^(nt) + PMT × [(1 + r/n)^(nt) - 1] / (r/n)
-  where:
-    P   = principal (initial deposit)
-    r   = annual rate as decimal
-    n   = compounding periods per year
-    t   = years
-    PMT = payment per compounding period (monthly contrib adjusted if needed)
-
-  We calculate year by year so we can feed data to the chart.
-*/
-
-function calcYearByYear(P, monthlyPMT, annualRate, years, n) {
-  const r = annualRate / 100;
-  const rPerPeriod = r / n;
-  // Convert monthly contribution to per-period contribution
-  const pmtPerPeriod = monthlyPMT * (12 / n);
-
-  const balances = [];
-  const contributions = [];
-
-  let balance = P;
-  let totalContrib = P;
-
-  for (let year = 1; year <= years; year++) {
-    // Apply n compounding periods for this year
-    for (let period = 0; period < n; period++) {
-      balance = balance * (1 + rPerPeriod) + pmtPerPeriod;
-      totalContrib += pmtPerPeriod;
-    }
-    balances.push(balance);
-    contributions.push(totalContrib);
-  }
-
-  return { balances, contributions };
-}
+// calcYearByYear() lives in calc.js (loaded before this file) so the maths can be tested without a browser.
 
 
 // ── Formatting ────────────────────────────────────────────────
